@@ -10,7 +10,7 @@ const App = () => {
 
   
   const user = async () => {
-    await api.get('/users/Erik-Gomes-Siqueira')
+    await api.get('usuarios/usernameGithub')
     .then((response)=> {
       setIsAuth(true)
       const{ avatar_url, name, bio } = response.data
