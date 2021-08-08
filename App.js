@@ -6,33 +6,38 @@ import api from './src/services/api'
 const App = () => {
   const [userData, setUserData] = useState([])
   const [username, setUsername] = useState()
-  const [isAuth, setIsAuth] = useState()
-
+  const [isAuth, setIsAuth] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   
   const user = async () => {
-    await api.get('usuarios/usernameGithub')
+    await api.get('/users/Erik-Gomes-Siqueira')
     .then((response)=> {
-      setIsAuth(true)
       const{ avatar_url, name, bio } = response.data
       setUserData({
-                    avatar_url,
-                    name,
-                    bio
-                  })
+        avatar_url,
+        name,
+        bio
+      })
+      setIsAuth(true)
+      setIsLoading(false)
                 })
                 .catch((err) =>{
-                  setIsAuth(false)
                   setUserData({error: err})
+                  setIsAuth(false)
+                  setIsLoading(false)
               })
               
             }
-useEffect(() => user(),[])
-const uriImage= userData.avatar_url
+  useEffect(() => user(),[])
+  if(isLoading){
+    return <Text>Aguarde...</Text>
+  }
+  else{
     return(
       <View>
         {isAuth ?
               <>
-                <Image source={{uri: uriImage}}/>
+                <Image source={{uri: userData.avatar_url}}/>
                 <Text>{userData.name}</Text>
                 <Text>{userData.bio}</Text>
               </>
@@ -42,6 +47,7 @@ const uriImage= userData.avatar_url
         }
       </View>
     )
+  }
   
 }
 
