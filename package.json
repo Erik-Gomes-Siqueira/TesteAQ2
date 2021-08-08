@@ -13,7 +13,8 @@
     "axios": "^0.21.1",
     "react": "17.0.1",
     "react-native": "0.64.2",
-    "react-native-dotenv": "^3.1.1"
+    "react-native-dotenv": "^3.1.1",
+    "react-native-wifi-reborn": "^4.3.8"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
